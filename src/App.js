@@ -166,6 +166,7 @@ function App() {
     socket.emit('From WebClient','Hello from webclient')
     socket.on('From Server',(msg)=>{console.log(msg)})
     socket.on('From MobClient',(msg)=>{console.log(msg)})
+    socket.on('Via Server',(msg)=>{console.log(msg)})
   },[])
 
   return (
