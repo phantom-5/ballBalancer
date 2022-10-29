@@ -162,7 +162,7 @@ function App() {
     useGLTF.preload("assets/balls/ball.glb");
     useGLTF.preload("assets/balls/carbon.glb");
     useGLTF.preload("assets/balls/platform.glb");
-    let socket = io("http://localhost:5000");
+    let socket = io("https://ballbalancer.herokuapp.com"); //http://localhost:5000
     socket.emit('From WebClient','Hello from webclient')
     socket.on('From Server',(msg)=>{console.log(msg)})
     socket.on('From MobClient',(msg)=>{console.log(msg)})
