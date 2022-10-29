@@ -165,7 +165,6 @@ function App() {
     let socket = io("https://ballbalancer.herokuapp.com"); //http://localhost:5000
     socket.emit('From WebClient','Hello from webclient')
     socket.on('From Server',(msg)=>{console.log(msg)})
-    socket.on('From MobClient',(msg)=>{console.log(msg)})
     socket.on('Via Server',(msg)=>{console.log(msg)})
   },[])
 
