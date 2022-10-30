@@ -18,7 +18,7 @@ function App() {
   const [rotatePlatform,setRotatePlatform] = useState([1.55,0,0])
   const [rotateBase,setRotateBase] = useState([0,0,0])
   const rotatePlatformRef = useRef([1.55,0,0])
-  const [pairedStatus,setPairedStatus] = useState(false)
+  const [pairedStatus,setPairedStatus] = useState(true)
   const pairInput = useRef(null)
   const socketRef = useRef(null)
 
@@ -141,12 +141,12 @@ function App() {
       );
   }
 
-  const BackgroundPlane = () => {
-    const [ref,api] = usePlane(()=>({position:[0,0,-5],args:[10,10,10] ,onCollide:()=>(console.log('Ball Fell'))}))
+  const SidePlane = () => {
+    const [ref,api] = usePlane(()=>({position:[3.2,0,-10],args:[0.2,0.2,0.2], rotation:[0,Math.PI/2,0] ,onCollide:()=>(console.log('Ball Fell'))}))
     return(
       <mesh ref={ref}>
         <planeGeometry attach="geometry" args={[10,10,10]}/>
-        <meshLambertMaterial attach="material" color="white" opacity={0} transparent  />
+        <meshLambertMaterial attach="material" color="white" />
       </mesh>
     )
   }
@@ -177,14 +177,18 @@ function App() {
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
     socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
+    let timeout
     if(msg==='Success'){
-      setPairedStatus(true)
+      timeout = setTimeout(()=>{setPairedStatus(true)},5000)
     }
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
     planeApi.current.rotation.set(Math.PI/2+(0.1*accData.x),0,-0.1*accData.y)
 })
+ return () => {
+  clearTimeout(timeout)
+ }
   },[])
 
   return (
@@ -226,6 +230,7 @@ function App() {
           {/* <BoxPlane/> */}
          {/*  <BackgroundPlane/> */}
           <Platform1/>
+          <SidePlane/>
           </Physics>
           <OrbitControls/>
         </Canvas>
