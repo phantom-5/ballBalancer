@@ -185,18 +185,6 @@ function App() {
     let accData = JSON.parse(msg)
     console.log('Acc DATA',accData)
     planeApi.current.rotation.set(Math.PI/2-(0.1*accData.x),0,-0.1*accData.y)
-    if(accData.y<=0){
-      rotatePlane('Left',accData.y)
-    }
-    else if(accData.y>0){
-      rotatePlane('Right',accData.y)
-    }
-    if(accData.x<=0){
-      rotatePlane('Top',accData.x)
-    }
-    else if(accData.x>0){
-      rotatePlane('Bottom',accData.x)
-    }
 })
   },[])
 
