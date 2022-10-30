@@ -26,11 +26,12 @@ function App() {
     socketRef.current.emit('Register WebClient',pairInput.current.value)
   }
 
-  const rotatePlane = (param) => {
+  const rotatePlane = (param,factor) => {
     if(param==='Left'){
+      /* in my phone left is y negative */
       /* setRotatePlatform([1.55,0,0.2])
       setRotateBase([0,-0.1,0]) */
-      planeApi.current.rotation.set(Math.PI/2,0,0.1)
+      planeApi.current.rotation.set(Math.PI/2,0,Math.abs(factor)*0.1)
       
     }
     if(param==='Right'){
@@ -175,11 +176,14 @@ function App() {
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
     socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
-    socketRef.current.on('Accelerometer Data',(msg)=>{console.log('Acc Data',msg)})
     if(msg==='Success'){
       setPairedStatus(true)
     }
   })
+  socketRef.current.on('Accelerometer Data',(msg)=>{console.log('Acc Data',msg)
+    let accData = JSON.parse(msg)
+    rotatePlane('left',accData.y)
+})
   },[])
 
   return (
