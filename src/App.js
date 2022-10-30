@@ -31,7 +31,7 @@ function App() {
       /* in my phone left is y negative */
       /* setRotatePlatform([1.55,0,0.2])
       setRotateBase([0,-0.1,0]) */
-      planeApi.current.rotation.set(Math.PI/2,0,0.1+Math.abs(factor)/10)
+      planeApi.current.rotation.set(Math.PI/2,0,0.1*Math.abs(factor))
       
     }
     if(param==='Right'){
