@@ -176,8 +176,8 @@ function App() {
     socketRef.current.emit('From WebClient','Hello from webclient')
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
-    socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
     let timeout
+    socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
     if(msg==='Success'){
       timeout = setTimeout(()=>{setPairedStatus(true)},5000)
     }
@@ -192,7 +192,7 @@ function App() {
   },[])
 
   return (
-    <div className="App">
+    <div>
       {pairedStatus &&
       <>
      {/*  <div className="container pt-2 pb-2">
