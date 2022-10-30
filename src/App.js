@@ -181,7 +181,7 @@ function App() {
     }
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
-    console.log('Acc Data',accData)
+    let accData = JSON.parse(msg)
     rotatePlane('Left',accData.y)
 })
   },[])
