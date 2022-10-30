@@ -18,6 +18,14 @@ function App() {
   const [rotatePlatform,setRotatePlatform] = useState([1.55,0,0])
   const [rotateBase,setRotateBase] = useState([0,0,0])
   const rotatePlatformRef = useRef([1.55,0,0])
+  const [pairedStatus,setPairedStatus] = useState(false)
+  const pairInput = useRef(null)
+  const socketRef = useRef(null)
+
+  const registerWebClientToServer = () => {
+    socketRef.current.emit('Register WebClient',pairInput.current.value)
+  }
+
   const rotatePlane = (param) => {
     if(param==='Left'){
       /* setRotatePlatform([1.55,0,0.2])
@@ -162,14 +170,17 @@ function App() {
     useGLTF.preload("assets/balls/ball.glb");
     useGLTF.preload("assets/balls/carbon.glb");
     useGLTF.preload("assets/balls/platform.glb");
-    let socket = io("https://ballbalancer.herokuapp.com"); //http://localhost:5000
-    socket.emit('From WebClient','Hello from webclient')
-    socket.on('From Server',(msg)=>{console.log(msg)})
-    socket.on('Via Server',(msg)=>{console.log(msg)})
+    socketRef.current = io("https://ballbalancer.herokuapp.com"); //http://localhost:5000
+    socketRef.current.emit('From WebClient','Hello from webclient')
+    socketRef.current.on('From Server',(msg)=>{console.log(msg)})
+    socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
+    socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)})
   },[])
 
   return (
     <div className="App">
+      {pairedStatus &&
+      <>
       <div className="container pt-2 pb-2">
         <div className="row">
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Left')}}>Left</button></div>
@@ -209,6 +220,17 @@ function App() {
           <OrbitControls/>
         </Canvas>
       </div>
+      </>}
+      {!pairedStatus &&
+        <>
+        <div className="row">
+          <div className="col-12" style={{textAlign:'center'}}>
+          <input type="number" placeholder="Enter Number" ref={pairInput} />
+          <button className='btn btn-success'>Submit</button>
+        </div>
+        </div>
+        </>
+      }
     </div>
   );
 }
