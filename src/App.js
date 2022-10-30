@@ -230,7 +230,6 @@ function App() {
           {/* <BoxPlane/> */}
          {/*  <BackgroundPlane/> */}
           <Platform1/>
-          <SidePlane/>
           </Physics>
           <OrbitControls/>
         </Canvas>
