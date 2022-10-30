@@ -191,14 +191,14 @@ function App() {
     <div className="App">
       {pairedStatus &&
       <>
-      <div className="container pt-2 pb-2">
+     {/*  <div className="container pt-2 pb-2">
         <div className="row">
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Left')}}>Left</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Right')}}>Right</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Top')}}>Top</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Bottom')}}>Bottom</button></div>
         </div>
-      </div>
+      </div> */}
       <div style={{width:'100%', height:'90%'}}>
         <Canvas>
           <Stars/>
