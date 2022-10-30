@@ -182,6 +182,7 @@ function App() {
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
+    console.log('Acc DATA',accData)
     if(accData.y<=0){
       rotatePlane('Left',accData.y)
     }
