@@ -176,19 +176,16 @@ function App() {
     socketRef.current.emit('From WebClient','Hello from webclient')
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
-    let timeout
     socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
     if(msg==='Success'){
-      timeout = setTimeout(()=>{setPairedStatus(true)},5000)
+      setPairedStatus(true)
     }
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
     planeApi.current.rotation.set(Math.PI/2+(0.1*accData.x),0,-0.1*accData.y)
 })
- return () => {
-  clearTimeout(timeout)
- }
+ 
   },[])
 
   return (
