@@ -37,17 +37,17 @@ function App() {
     if(param==='Right'){
       /* setRotatePlatform([1.55,0,-0.2])
       setRotateBase([0,0.1,0]) */
-      planeApi.current.rotation.set(Math.PI/2,0,-0.1)
+      planeApi.current.rotation.set(Math.PI/2,0,-0.1*Math.abs(factor))
     }
     if(param==='Top'){
       /* setRotatePlatform([1.2,0,0])
       setRotateBase([-0.1,0,0]) */
-      planeApi.current.rotation.set(Math.PI/2-0.1,0,0)
+      planeApi.current.rotation.set(Math.PI/2-(0.1*Math.abs(factor)),0,0)
     }
     if(param==='Bottom'){
       /* setRotatePlatform([1.8,0,0])
       setRotateBase([0.1,0,0]) */
-      planeApi.current.rotation.set(Math.PI/2+0.1,0,0)
+      planeApi.current.rotation.set(Math.PI/2+(0.1*Math.abs(factor)),0,0)
     }
   }
 
@@ -182,7 +182,18 @@ function App() {
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
-    rotatePlane('Left',accData.y)
+    if(accData.y<=0){
+      rotatePlane('Left',accData.y)
+    }
+    else if(accData.y>0){
+      rotatePlane('Right',accData.y)
+    }
+    if(accData.x<=0){
+      rotatePlane('Top',accData.x)
+    }
+    else if(accData.x>0){
+      rotatePlane('Bottom',accData.x)
+    }
 })
   },[])
 
