@@ -32,23 +32,23 @@ function App() {
       /* in my phone left is y negative */
       /* setRotatePlatform([1.55,0,0.2])
       setRotateBase([0,-0.1,0]) */
-      planeApi.current.rotation.set(Math.PI/2,0,0.1*Math.abs(factor))
+      planeApi.current.rotation.set(Math.PI/2,0,0.1)
       
     }
     if(param==='Right'){
       /* setRotatePlatform([1.55,0,-0.2])
       setRotateBase([0,0.1,0]) */
-      planeApi.current.rotation.set(Math.PI/2,0,-0.1*Math.abs(factor))
+      planeApi.current.rotation.set(Math.PI/2,0,-0.1)
     }
     if(param==='Top'){
       /* setRotatePlatform([1.2,0,0])
       setRotateBase([-0.1,0,0]) */
-      planeApi.current.rotation.set(Math.PI/2-(0.1*Math.abs(factor)),0,0)
+      planeApi.current.rotation.set(Math.PI/2-(0.1),0,0)
     }
     if(param==='Bottom'){
       /* setRotatePlatform([1.8,0,0])
       setRotateBase([0.1,0,0]) */
-      planeApi.current.rotation.set(Math.PI/2+(0.1*Math.abs(factor)),0,0)
+      planeApi.current.rotation.set(Math.PI/2+(0.1),0,0)
     }
   }
 
@@ -184,6 +184,7 @@ function App() {
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
     console.log('Acc DATA',accData)
+    planeApi.current.rotation.set(Math.PI/2-(0.1*accData.x),0,-0.1*accData.y)
     if(accData.y<=0){
       rotatePlane('Left',accData.y)
     }
