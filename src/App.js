@@ -226,7 +226,7 @@ function App() {
         <div className="row">
           <div className="col-12" style={{textAlign:'center'}}>
           <input type="number" placeholder="Enter Number" ref={pairInput} />
-          <button className='btn btn-success'>Submit</button>
+          <button className='btn btn-success' onClick={registerWebClientToServer}>Submit</button>
         </div>
         </div>
         </>
