@@ -174,7 +174,12 @@ function App() {
     socketRef.current.emit('From WebClient','Hello from webclient')
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
-    socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)})
+    socketRef.current.on('MapStatus',(msg)=>{console.log('MapStatus',msg)
+    socketRef.current.on('Accelerometer Data',(msg)=>{console.log('Acc Data',msg)})
+    if(msg==='Success'){
+      setPairedStatus(true)
+    }
+  })
   },[])
 
   return (
