@@ -183,8 +183,7 @@ function App() {
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
-    console.log('Acc DATA',accData)
-    planeApi.current.rotation.set(Math.PI/2-(0.1*accData.x),0,-0.1*accData.y)
+    planeApi.current.rotation.set(Math.PI/2+(0.1*accData.x),0,-0.1*accData.y)
 })
   },[])
 
