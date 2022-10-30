@@ -180,7 +180,8 @@ function App() {
       setPairedStatus(true)
     }
   })
-  socketRef.current.on('Accelerometer Data',(msg)=>{console.log('Acc Data',msg)
+  socketRef.current.on('Accelerometer Data',(msg)=>{
+    console.log('Acc Data',msg)
     let accData = JSON.parse(msg)
     console.log('Acc Data',accData)
     rotatePlane('left',accData.y)
