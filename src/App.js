@@ -27,6 +27,7 @@ function App() {
   }
 
   const rotatePlane = (param,factor) => {
+    console.log('Rotate Plane Called',param,factor)
     if(param==='Left'){
       /* in my phone left is y negative */
       /* setRotatePlatform([1.55,0,0.2])
