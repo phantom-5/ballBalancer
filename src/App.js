@@ -18,7 +18,7 @@ function App() {
   const [rotatePlatform,setRotatePlatform] = useState([1.55,0,0])
   const [rotateBase,setRotateBase] = useState([0,0,0])
   const rotatePlatformRef = useRef([1.55,0,0])
-  const [pairedStatus,setPairedStatus] = useState(true)
+  const [pairedStatus,setPairedStatus] = useState(false)
   const pairInput = useRef(null)
   const socketRef = useRef(null)
 
@@ -192,7 +192,7 @@ function App() {
   },[])
 
   return (
-    <div>
+    <div className="App">
       {pairedStatus &&
       <>
      {/*  <div className="container pt-2 pb-2">
