@@ -19,7 +19,7 @@ function App() {
   const [rotatePlatform,setRotatePlatform] = useState([1.55,0,0])
   const [rotateBase,setRotateBase] = useState([0,0,0])
   const rotatePlatformRef = useRef([1.55,0,0])
-  const [pairedStatus,setPairedStatus] = useState(true)
+  const [pairedStatus,setPairedStatus] = useState(false)
   const pairInput = useRef(null)
   const socketRef = useRef(null)
   const sphereAPI = useRef(null)
@@ -250,12 +250,12 @@ function App() {
       {pairedStatus &&
       <>
       <div className="container pt-2 pb-2">
-        <div className="row">
+        {/* <div className="row">
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Left')}}>Left</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Right')}}>Right</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Top')}}>Top</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Bottom')}}>Bottom</button></div>
-        </div>
+        </div> */}
       </div>
       <div style={{width:'100%', height:'90%'}}>
         <Canvas>
