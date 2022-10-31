@@ -19,7 +19,7 @@ function App() {
   const [rotatePlatform,setRotatePlatform] = useState([1.55,0,0])
   const [rotateBase,setRotateBase] = useState([0,0,0])
   const rotatePlatformRef = useRef([1.55,0,0])
-  const [pairedStatus,setPairedStatus] = useState(false)
+  const [pairedStatus,setPairedStatus] = useState(true)
   const pairInput = useRef(null)
   const socketRef = useRef(null)
   const sphereAPI = useRef(null)
@@ -127,7 +127,7 @@ function App() {
   }
 
   const CarbonBall = (props) => {
-    const [ref,api] = useSphere(() => ({args: [0.35], mass: 500, position: [0, 0, 3]}))
+    const [ref,api] = useSphere(() => ({args: [0.35], mass: 5000, position: [0, 0, 3]}))
     sphereAPI.current = api
     const { nodes, materials } = useGLTF("assets/balls/carbon.glb");
     return (
@@ -240,7 +240,7 @@ function App() {
   })
   socketRef.current.on('Accelerometer Data',(msg)=>{
     let accData = JSON.parse(msg)
-    planeApi.current.rotation.set(Math.PI/2+(0.1*accData.x),0,-0.1*accData.y)
+    planeApi.current.rotation.set(Math.PI/2+(0.1*(accData.x?1:0)),0,-0.1*(accData.y?1:0))
 })
 
   },[])
@@ -250,12 +250,12 @@ function App() {
       {pairedStatus &&
       <>
       <div className="container pt-2 pb-2">
-        {/* <div className="row">
+        <div className="row">
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Left')}}>Left</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Right')}}>Right</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Top')}}>Top</button></div>
           <div className="col-3"><button className="btn btn-primary" onClick={()=>{rotatePlane('Bottom')}}>Bottom</button></div>
-        </div> */}
+        </div>
       </div>
       <div style={{width:'100%', height:'90%'}}>
         <Canvas>
