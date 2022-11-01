@@ -229,7 +229,7 @@ function App() {
     useGLTF.preload("assets/balls/ball.glb");
     useGLTF.preload("assets/balls/carbon.glb");
     useGLTF.preload("assets/balls/platform.glb");
-    socketRef.current = io("https://ballbalancer.herokuapp.com"); //http://localhost:5000
+    socketRef.current = io("https://ballbalancer.herokuapp.com",{transports: ['websocket', 'polling']}); //http://localhost:5000
     socketRef.current.emit('From WebClient','Hello from webclient')
     socketRef.current.on('From Server',(msg)=>{console.log(msg)})
     socketRef.current.on('Via Server',(msg)=>{console.log(msg)})
